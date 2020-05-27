@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import de.telekom.sea.mystuff.frontend.android.api.ApiFactory;
+import de.telekom.sea.mystuff.frontend.android.BuildConfig;
+
 import lombok.Getter;
 import timber.log.Timber;
 
@@ -20,9 +22,10 @@ public class MyStuffContext {
     private ApiFactory apiFactory;
     private MyStuffApplication app;
 
-    void initWithApplication(MyStuffApplication app) {
+    public MyStuffContext initWithApplication(MyStuffApplication app) {
         this.app = app;
-        this.apiFactory = new ApiFactory(BuildConfig.APIFACTORY_HOSTNAME, BuildConfig.APIFACTORY_PROTOCOL, BuildConfig.APIFACTORY_PORT);
+        this.apiFactory = new ApiFactory();
+        return this;
     }
 
     public String getString(int resId) {

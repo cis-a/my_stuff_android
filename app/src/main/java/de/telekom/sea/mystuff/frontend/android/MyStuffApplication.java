@@ -7,6 +7,7 @@ import timber.log.Timber;
 
 public class MyStuffApplication extends Application {
 
+    @Getter
     private static MyStuffApplication instance;
     @Getter
     private MyStuffContext myStuffContext;

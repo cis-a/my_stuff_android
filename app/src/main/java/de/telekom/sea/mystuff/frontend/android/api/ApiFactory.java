@@ -3,15 +3,13 @@ package de.telekom.sea.mystuff.frontend.android.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.security.cert.Certificate;
-import java.util.Collection;
-
 import de.telekom.sea.mystuff.frontend.android.BuildConfig;
 import lombok.Getter;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 
 /**
@@ -19,20 +17,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ApiFactory {
 
-    private final Retrofit retrofit;
+
     @Getter
     private final String baseRestUrl;
     private final String hostName;
-    private final Integer port;
+    private final Retrofit retrofit;
+    private OkHttpClient okHttpClient;
 
-    public ApiFactory(
-            String hostName,
-            String protocol,
-            Integer port) {
+    public ApiFactory() {
 
-        this.baseRestUrl = BuildConfig.APIFACTORY_PROTOCOL + "://" + BuildConfig.APIFACTORY_HOSTNAME + ":" + BuildConfig.APIFACTORY_PORT;
-        this.hostName = BuildConfig.APIFACTORY_HOSTNAME;
-        this.port = BuildConfig.APIFACTORY_PORT;
+        //TODO check why symbols from class BuildConfig cannot be found in Build Process
+//        this.baseRestUrl = BuildConfig.APIFACTORY_PROTOCOL + "://" + BuildConfig.APIFACTORY_HOSTNAME + ":" + BuildConfig.APIFACTORY_PORT;
+//        this.hostName = BuildConfig.APIFACTORY_HOSTNAME;
+        this.baseRestUrl = "http" + "://" +"10.0.2.2" + ":" +"8080";
+        this.hostName = "10.0.2.2";
+
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -42,7 +41,6 @@ public class ApiFactory {
         okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
-
 
         Gson gson = new GsonBuilder()
                 .setLenient()
