@@ -20,9 +20,10 @@ public class ApiFactory {
 
     @Getter
     private final String baseRestUrl;
+    @Getter
     private final String hostName;
     private final Retrofit retrofit;
-    private OkHttpClient okHttpClient;
+    private final OkHttpClient okHttpClient;
 
     public ApiFactory() {
 
@@ -32,13 +33,10 @@ public class ApiFactory {
         this.baseRestUrl = "http" + "://" +"10.0.2.2" + ":" +"8080";
         this.hostName = "10.0.2.2";
 
-
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient okHttpClient;
-        // create OkHttp client
-        okHttpClient = new OkHttpClient.Builder()
+        this.okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
 

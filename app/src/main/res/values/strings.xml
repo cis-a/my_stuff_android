@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyStuff</string>
+    <string name="my_items">My Items</string>
 </resources>
