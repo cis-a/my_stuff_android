@@ -16,6 +16,7 @@ import de.telekom.sea.mystuff.frontend.android.api.ApiResponse;
 import de.telekom.sea.mystuff.frontend.android.model.Item;
 import de.telekom.sea.mystuff.frontend.android.ui.ItemListRecyclerViewAdapter;
 import de.telekom.sea.mystuff.frontend.android.ui.ItemListViewModel;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         itemList.observe(this, new Observer<ApiResponse<List<Item>>>() {
             @Override
             public void onChanged(ApiResponse<List<Item>> listApiResponse) {
+                Timber.d("listApiResponse: "+ itemList.getValue().body.toString());
                 itemListRecyclerViewAdapter.updateItems(itemList.getValue().body);
                 ((MyStuffApplication) getApplication()).getMyStuffContext().sendInfoMessage("List loaded: " + itemList.getValue().body.toString());
             }
