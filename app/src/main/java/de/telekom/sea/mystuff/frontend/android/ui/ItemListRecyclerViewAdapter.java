@@ -42,8 +42,7 @@ public class ItemListRecyclerViewAdapter extends
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Item item = getItemList().get(position);
-        //TODO clarify why setItem will not work
-//        viewHolder.getBinding().setItem(item);
+        viewHolder.getBinding().setItem(item);
     }
 
     @Override
